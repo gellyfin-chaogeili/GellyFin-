@@ -1047,6 +1047,12 @@
             font-weight: 600;
             color: var(--primary-dark);
         }
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0; /* 如果需要圆角可以设置 */
+        }
 
         /* 响应式调整 */
         @media (max-width: 768px) {
@@ -1185,7 +1191,9 @@
             </div>
             <div class="team-grid">
                 <div class="team-member">
-                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-image">
+                        <img src="images/wangheren.jpg" alt="王和任">
+                    </div>
                     <div class="member-info">
                         <h3>王和任</h3>
                         <div class="member-role">首席执行官</div>
@@ -1193,7 +1201,9 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-image">
+                        <img src="images/lijing.jpg" alt="李静">
+                    </div>
                     <div class="member-info">
                         <h3>李静</h3>
                         <div class="member-role">技术总监</div>
@@ -1201,7 +1211,9 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-image">
+                        <img src="images/jinjiandong.jpg" alt="金建东">
+                    </div>
                     <div class="member-info">
                         <h3>金建东</h3>
                         <div class="member-role">产品总监</div>
