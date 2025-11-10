@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GellyFin Tech - 企业数据智能与自动化专家</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #2563eb; /* 更明亮的蓝色 */
+            --primary-dark: #1e40af; /* 深蓝色 */
+            --accent-blue: #3b82f6; /* 强调蓝色 */
+            --light-bg: #f8fafc; /* 浅灰背景 */
+            --dark-text: #1f2937; /* 深色文字 */
+            --light-text: #6b7280; /* 浅色文字 */
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0, 3px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--primary-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .auth-link {
+            font-weight: 500;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .auth-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .auth-link:hover::after {
+            width: 100%;
+        }
+
+        .cta-button-small {
+            background: var(--gradient);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            font-size: 0.9rem;
+        }
+
+        .cta-button-small:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* 英雄区域 */
+        .hero {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 180px 2rem 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .cta-button-large {
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            font-size: 1.1rem;
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .secondary-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* 内容区块通用样式 */
+        .section {
+            padding: 100px 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6 ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 服务项目 */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: var(--light-text);
+        }
+
+        /* 客户案例轮播 */
+        .clients-section {
+            background-color: var(--light-bg);
+            padding: 80px 2rem;
+        }
+
+        .clients-slider {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .client-logo {
+            background: rgba(37, 99, 235, 0.3); /* 主蓝色的10%透明度 */
+            border: 1px solid rgba(37, 99, 235, 0.3); /* 添加轻微边框 */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin: 0 1.5rem;
+            flex: 0 0 auto;
+            width: 180px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .slider-btn {
+            background: var(--white);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* 团队展示 */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+ }
+
+        .team-member {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .member-image {
+            height: 280px;
+            background: linear-gradient(45deg, #e5e7eb, #f3f4f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text);
+            font-size: 4rem;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .member-role {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .member-desc {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* 常见问题 */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: var(--light-bg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 300px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-col h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-hover);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .nav-auth {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-dark);
+            text-align: center;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .code-input-group input {
+            flex: 1;
+        }
+
+        .send-code-btn {
+            background: var(--light-bg);
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 0 1rem;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-code-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+
+        .send-code-btn.sending {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .cta-button-full {
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .cta-button-full:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--light-text);
+        }
+
+        .auth-switch {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        /* Toast提示 */
+        .toast {
+            position: fixed;
+            bottom: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 3000;
+            transition: bottom 0.5s ease;
+        }
+
+        .toast.active {
+            bottom: 20px;
+        }
+
+        .toast i {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+        /* 密码验证样式 */
+        .password-match {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important;
+        }
+
+        .password-mismatch {
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+        }
+        /* 注册价值板块样式 */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+        }
+
+        .value-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+        }
+
+        .value-card p {
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .value-cta {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
+            border-radius: 12px;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .value-cta .cta-button-large {
+            margin-bottom: 1rem;
+        }
+
+        .value-note {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .value-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .value-card {
+                padding: 1.5rem;
+            }
+            
+            .value-icon {
+                font-size: 2rem;
+                width: 60px;
+                height: 60px;
+            }
+        }
+        /* 客户详情弹窗样式 */
+        .client-detail-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .client-detail-modal.active {
+            display: flex;
+        }
+
+        .client-detail-content {
+            background: var(--white);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-hover);
+            position: relative;
+        }
+
+        .client-detail-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: var(--light-text);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .client-detail-close:hover {
+            background: var(--light-bg);
+            color: var(--primary-dark);
+        }
+
+        .client-detail-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .client-logo-large {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: var(--shadow);
+        }
+
+        .client-info {
+            flex: 1;
+        }
+
+        .client-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .client-industry {
+            color: var(--primary-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .client-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .client-tag {
+            background: var(--light-bg);
+            color: var(--light-text);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .client-detail-body {
+            padding: 2rem;
+        }
+
+        .client-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light-bg);
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        .client-challenge, .client-solution, .client-results {
+            margin-bottom: 2rem;
+        }
+
+        .client-detail-body h4 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .client-detail-body h4 i {
+            color: var(--primary-blue);
+        }
+
+        .client-detail-body p {
+            color: var(--dark-text);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .client-quote {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.05) 100%);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.5rem 0;
+        }
+
+        .quote-text {
+            font-style: italic;
+            color: var(--dark-text);
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .client-detail-header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.5rem 1rem 1rem;
+            }
+            
+            .client-info h3 {
+                font-size: 1.5rem;
+            }
+            
+            .client-detail-body {
+                padding: 1.5rem 1rem;
+            }
+            
+            .client-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item {
+                padding: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">GellyFin <span>Tech</span></a>
+            <ul class="nav-links">
+                <li><a href="#services" class="active">解决方案</a></li>
+                <li><a href="#clients">客户案例</a></li>
+                <li><a href="#value">注册价值</a></li> <!-- 新增 -->
+                <li><a href="#team">团队</a></li>
+                <li><a href="#faq">常见问题</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="nav-auth">
+                <a href="#login" class="auth-link">登录</a>
+                <a href="#register" class="cta-button-small">免费注册</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+        </div>
+    </nav>
+
+    <!-- 主页英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>赋能企业，驱动智能未来</h1>
+            <p>GellyFin Tech 是领先的企业级数据智能与流程自动化解决方案提供商，致力于通过创新技术帮助企业提升效率、优化决策。</p>
+            <div class="hero-buttons">
+                <a href="#register" class="cta-button">🚀 免费注册体验</a>
+                <a href="#contact" class="cta-button">立即咨询</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务/解决方案区域 -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>核心解决方案</h2>
+                <p>我们提供全面的技术栈，助力企业实现数字化转型</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>智能数据中台</h3>
+                    <p>构建统一、规范、可复用的数据资产体系，打通信息孤岛，实现数据驱动的精细化运营。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>API 集成与管理</h>
+                    <p>安全、高效地连接内外部系统与服务，构建灵活可扩展的企业应用生态。</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>流程自动化引擎</h3>
+                    <p>将重复、规则化的业务流程自动化，释放人力，减少错误，显著提升运营效率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户案例 -->
+    <section class="clients-section" id="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>信任我们的客户</h2>
+                <p>我们已为各行业领先企业提供专业技术解决方案</p>
+            </div>
+            <div class="clients-slider">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                
+                <!-- 修改客户logo，添加data-client属性和点击事件 -->
+                <div class="client-logo" data-client="clientA" onclick="showClientDetail('clientA')">
+                    <span>客户A</span>
+                </div>
+                <div class="client-logo" data-client="clientB" onclick="showClientDetail('clientB')">
+                    <span>客户B</span>
+                </div>
+                <div class="client-logo" data-client="clientC" onclick="showClientDetail('clientC')">
+                    <span>客户C</span>
+                </div>
+                <div class="client-logo" data-client="clientD" onclick="showClientDetail('clientD')">
+                    <span>客户D</span>
+                </div>
+                
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 团队展示 -->
+    <section class="section" id="team">
+        <div class="container">
+            <div class="section-title">
+                <h2>专业团队</h2>
+                <p>我们的团队由行业资深专家和技术精英组成</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-info">
+                        <h3>王和任</h3>
+                        <div class="member-role">首席执行官</div>
+                        <p class="member-desc">前科技公司技术总监，15年企业服务经验，专注于数据智能领域。</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-info">
+                        <h3>李静</h3>
+                        <div class="member-role">技术总监</div>
+                        <p class="member-desc">大数据与人工智能专家，主导过多项国家级数据平台建设项目。</p>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <div class="member-image"><i class="fas fa-user"></i></div>
+                    <div class="member-info">
+                        <h3>金建东</h3>
+                        <div class="member-role">产品总监</div>
+                        <p class="member-desc">资深产品专家，深耕企业级SaaS产品设计，对用户体验有深刻洞察。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 注册价值说明 -->
+    <section class="section" id="value">
+        <div class="container">
+            <div class="section-title">
+                <h2>注册账号，开启智能之旅</h2>
+                <p>立即注册GellyFin Tech账号，体验专业级数据智能服务的全部优势</p>
+            </div>
+            <div class="value-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>免费试用专业工具</h3>
+                    <p>立即获得所有核心功能的14天免费试用权限，零风险体验企业级数据智能平台的强大能力。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>个性化方案定制</h3>
+                    <p>基于您的业务需求，我们的专家团队将为您量身定制最适合的数据智能解决方案。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>专属技术顾问</h3>
+                    <p>注册后即刻分配专属技术顾问，为您提供一对一的技术咨询和实施指导服务。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>完整文档资源</h3>
+                    <p>获得完整的产品文档、API接口说明和技术白皮书，助力快速上手和深度集成。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>最新功能优先体验</h3>
+                    <p>作为注册用户，您将优先获得新功能内测资格和产品更新通知。</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>加入技术社区</h3>
+                    <p>成为我们技术社区的一员，与行业专家和其他用户交流经验，共同成长。</p>
+                </div>
+            </div>
+            <div class="value-cta">
+                <a href="#register" class="cta-button-large">🚀 立即免费注册</a>
+                <p class="value-note">注册完全免费，无需信用卡信息</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section class="section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>常见问题</h2>
+                <p>为您解答关于我们服务的常见疑问</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        GellyFin Tech 主要服务哪些行业？ <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        我们专注于为制造业、金融服务业、零售电商、物流供应链等行业提供数据智能与流程自动化解决方案，帮助企业实现数字化转型。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        项目实施周期通常需要多久？ <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        根据项目复杂程度不同，标准解决方案通常2-4周可完成部署，复杂定制化项目需要1-3个月。我们会为您提供详细的项目规划和实施路线图。
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        如何保证数据安全和隐私？ <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        我们采用银行级数据加密技术，所有数据传输和存储都经过严格加密处理。遵循GDPR等国际隐私保护规范，并通过ISO 27001信息安全认证，确保您的数据安全无忧。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>GellyFin Tech</h3>
+                <p>赋能企业智能化转型，驱动业务创新增长。</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-weixin"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>解决方案</h3>
+                <ul class="footer-links">
+                    <li><a href="#">智能数据中台</a></li>
+                    <li><a href="#">API集成管理</a></li>
+                    <li><a href="#">流程自动化</a></li>
+                    <li><a href="#">定制化开发</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>账户</h3>
+                <ul class="footer-links">
+                    <li><a href="#login">用户登录</a></li>
+                    <li><a href="#register">创建账户</a></li>
+                    <li><a href="#forgot-password">找回密码</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>法律</h3>
+                <ul class="footer-links">
+                    <li><a href="/privacy-policy.html">隐私政策</a></li>
+                    <li><a href="/terms-of-service.html">服务条款</a></li>
+                    <li><a href="/service-level-agreement.html">服务等级协议</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>联系我们</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> chaogeili@gellyfin.one</li>
+                    <li><i class="fas fa-phone"></i> 400-362-8565</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 上海市浦东新区张江高科技园区</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 GellyFin Tech. 版权所有.
+        </div>
+    </footer>
+
+    <!-- 注册模态框 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>创建您的账户</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="reg-email">您的邮箱</label>
+                    <input type="email" id="reg-email" placeholder="请输入您的邮箱" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">设置密码</label>
+                    <input type="password" id="reg-password" placeholder="至少8位字符" required>
+                </div>
+                <!-- 确认密码字段 - 添加在设置密码字段下方 -->
+                <div class="form-group">
+                    <label for="confirm-password">确认密码</label>
+                    <input type="password" id="confirm-password" placeholder="请再次输入密码" required>
+                    <small class="password-error" style="color: #dc2626; font-size: 0.875rem; display: none; margin-top: 0.25rem;">
+                        两次输入的密码不一致
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="verification-code">验证码</label>
+                    <div class="code-input-group">
+                        <input type="text" id="verification-code" placeholder="请输入6位验证码">
+                        <button type="button" id="send-code-btn" class="send-code-btn">发送验证码</button>
+                    </div>
+                </div>
+                <button type="submit" class="cta-button-full">创建账户</button>
+            </form>
+            <p class="auth-footer">已有账户？ <a href="#login" class="auth-switch">立即登录</a></p>
+        </div>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>登录您的账户</h2>
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">邮箱地址</label>
+                    <input type="email" id="login-email" placeholder="name@your-company.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">密码</label>
+                    <input type="password" id="login-password" placeholder="请输入您的密码" required>
+                </div>
+                <button type="submit" class="cta-button-full">登录</button>
+            </form>
+            <p class="auth-footer"><a href="#forgot-password">忘记密码？</a></p>
+            <p class="auth-footer">没有账户？ <a href="#register" class="auth-switch">免费注册</a></p>
+        </div>
+    </div>
+
+    <!-- 模拟的"验证码发送成功"提示 -->
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <i class="fas fa-check-circle"></i>
+            <span>验证码已发送至您的邮箱，请查收！</span>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动导航
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 更新导航菜单激活状态
+                    document.querySelectorAll('.nav-links a').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    // 平滑滚动到目标
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 移动端菜单切换
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 常见问题折叠面板
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // 客户案例轮播（简单实现）
+        const clientLogos = document.querySelectorAll('.client-logo');
+        let currentIndex = 0;
+        
+        function showClient(index) {
+            clientLogos.forEach((logo, i) => {
+                logo.style.display = Math.abs(i - index) <= 2 ? 'flex' : 'none';
+            });
+        }
+        
+        document.querySelector('.next-btn').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % clientLogos.length;
+            showClient(currentIndex);
+        });
+        
+        document.querySelector('.prev-btn').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + clientLogos.length) % clientLogos.length;
+            showClient(currentIndex);
+        });
+
+        // 初始化显示
+        showClient(currentIndex);
+
+        // 页面加载时滚动到顶部
+        window.onload = function() {
+            window.scrollTo(0, 0);
+        };
+
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'var(--white)';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // 服务卡片悬停效果增强
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+                card.style.boxShadow = 'var(--shadow-hover)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = 'var(--shadow)';
+            });
+        });
+
+        // 密码验证逻辑
+        const passwordInput = document.getElementById('reg-password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const passwordError = document.querySelector('.password-error');
+
+        function validatePasswords() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            // 如果确认密码为空，不显示错误
+            if (confirmPassword === '') {
+                passwordInput.classList.remove('password-match', 'password-mismatch');
+                confirmPasswordInput.classList.remove('password-match', 'password-mismatch');
+                passwordError.style.display = 'none';
+                return false;
+            }
+            
+            // 验证密码是否匹配
+            if (password === confirmPassword && password !== '') {
+                passwordInput.classList.add('password-match');
+                passwordInput.classList.remove('password-mismatch');
+                confirmPasswordInput.classList.add('password-match');
+                confirmPasswordInput.classList.remove('password-mismatch');
+                passwordError.style.display = 'none';
+                return true;
+            } else {
+                passwordInput.classList.add('password-mismatch');
+                passwordInput.classList.remove('password-match');
+                confirmPasswordInput.classList.add('password-mismatch');
+                confirmPasswordInput.classList.remove('password-match');
+                passwordError.style.display = 'block';
+                return false;
+            }
+        }
+
+        // 实时验证密码匹配
+        passwordInput.addEventListener('input', validatePasswords);
+        confirmPasswordInput.addEventListener('input', validatePasswords);
+
+        // 在表单提交时进行最终验证
+        document.querySelector('.auth-form').addEventListener('submit', function(e) {
+            if (!validatePasswords()) {
+                e.preventDefault();
+                alert('请确保两次输入的密码一致');
+            }
+        });
+
+        // 团队成员悬停效果
+        const teamMembers = document.querySelectorAll('.team-member');
+        teamMembers.forEach(member => {
+            member.addEventListener('mouseenter', () => {
+                member.style.transform = 'translateY(-5px)';
+                member.style.boxShadow = 'var(--shadow-hover)';
+            });
+            
+            member.addEventListener('mouseleave', () => {
+                member.style.transform = 'translateY(0)';
+                member.style.boxShadow = 'var(--shadow)';
+            });
+        });
+
+        // 自动轮播客户案例
+        let autoSlideInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % clientLogos.length;
+            showClient(currentIndex);
+        }, 5000);
+
+        // 鼠标悬停时暂停自动轮播
+        const clientsSection = document.querySelector('.clients-section');
+        clientsSection.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideInterval);
+        });
+
+        clientsSection.addEventListener('mouseleave', () => {
+            autoSlideInterval = setInterval(() => {
+                currentIndex = (currentIndex + 1) % clientLogos.length;
+                showClient(currentIndex);
+            }, 5000);
+        });
+
+        // 响应式导航菜单
+        const updateMenu = () => {
+            if (window.innerWidth <= 768) {
+                document.querySelector('.mobile-menu-btn').style.display = 'block';
+            } else {
+                document.querySelector('.mobile-menu-btn').style.display = 'none';
+                navLinks.classList.remove('active');
+            }
+        };
+
+        window.addEventListener('resize', updateMenu);
+        updateMenu();
+
+        // 模态框控制逻辑
+        const registerModal = document.getElementById('registerModal');
+        const loginModal = document.getElementById('loginModal');
+        const toast = document.getElementById('toast');
+        
+        // 打开模态框的链接
+        document.querySelectorAll('a[href="#register"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerModal.classList.add('active');
+            });
+        });
+        
+        document.querySelectorAll('a[href="#login"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.classList.add('active');
+            });
+        });
+        
+        // 关闭模态框
+        document.querySelectorAll('.close-modal').forEach(btn => {
+            btn.addEventListener('click', () => {
+                registerModal.classList.remove('active');
+                loginModal.classList.remove('active');
+            });
+        });
+        
+        // 模态框外部点击关闭
+        [registerModal, loginModal].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // 切换登录/注册
+        document.querySelectorAll('.auth-switch').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                registerModal.classList.toggle('active');
+                loginModal.classList.toggle('active');
+            });
+        });
+        
+        // 发送验证码按钮
+        const sendCodeBtn = document.getElementById('send-code-btn');
+        const emailInput = document.getElementById('reg-email');
+        
+        sendCodeBtn.addEventListener('click', () => {
+            const email = emailInput.value;
+            if (!email || !email.includes('@')) {
+                alert('请输入有效的邮箱地址');
+                return;
+            }
+            
+            // 模拟发送过程
+            sendCodeBtn.classList.add('sending');
+            sendCodeBtn.textContent = '发送中...';
+            
+            // 模拟网络延迟
+            setTimeout(() => {
+                sendCodeBtn.classList.remove('sending');
+                sendCodeBtn.textContent = '发送验证码';
+                
+                // 显示成功提示
+                toast.classList.add('active');
+                setTimeout(() => {
+                    toast.classList.remove('active');
+                }, 3000);
+            }, 1500);
+        });
+        
+        // 阻止表单默认提交
+        document.querySelectorAll('.auth-form').forEach(form => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('这是一个演示功能。在真实环境中，表单将会被提交。');
+                // 关闭模态框
+                registerModal.classList.remove('active');
+                loginModal.classList.remove('active');
+            });
+        });
+        // 客户案例数据
+        const clientData = {
+            clientA: {
+                name: "上海智能制造集团",
+                industry: "制造业 · 智能制造",
+                logo: "智造",
+                tags: ["数据中台", "流程自动化", "IoT集成"],
+                stats: [
+                    { value: "67%", label: "运营效率提升" },
+                    { value: "45%", label: "成本降低" },
+                    { value: "89%", label: "数据准确率" }
+                ],
+                challenge: "作为传统制造企业转型的标杆，上海智能制造集团面临着生产数据孤岛、设备监控不透明、供应链协同效率低下等挑战。急需构建统一的数据平台来实现生产全流程的可视化和智能化管理。",
+                solution: "我们为其部署了智能数据中台，集成ERP、MES、SCADA等12个核心系统，开发了基于AI的生产预测模型和实时设备监控平台，实现了从原材料采购到成品出厂的全链路数字化管理。",
+                results: "项目实施后，企业实现了生产数据的实时汇聚与分析，设备故障预测准确率达到92%，库存周转率提升56%，整体运营成本降低45%，年产值增加23%。",
+                quote: "GellyFin Tech的数据智能平台彻底改变了我们的生产管理模式，现在我们可以基于实时数据做出精准决策。",
+                author: "张总",
+                position: "生产运营总监"
+            },
+            clientB: {
+                name: "深圳金融科技公司",
+                industry: "金融服务业 · 科技金融",
+                logo: "金融",
+                tags: ["风控系统", "API集成", "实时分析"],
+                stats: [
+                    { value: "92%", label: "风控准确率" },
+                    { value: "300ms", label: "实时响应速度" },
+                    { value: "99.9%", label: "系统可用性" }
+                ],
+                challenge: "这家快速成长的金融科技公司需要处理海量的实时交易数据，但原有的风控系统响应慢，误判率高，无法满足业务快速增长的需求。",
+                solution: "我们构建了基于机器学习的高性能风控引擎，实现了毫秒级交易风险评估，通过API集成对接了多家数据源，建立了多维度的用户信用评估体系。",
+                results: "新系统将风控响应时间从2秒缩短至300毫秒，误判率降低78%，每年避免欺诈损失超过5000万元，支持了公司业务3倍增长。",
+                quote: "GellyFin的风控解决方案让我们在保证安全的前提下，实现了业务的快速增长。",
+                author: "李总",
+                position: "首席风险官"
+            },
+            clientC: {
+                name: "北京电商平台",
+                industry: "电子商务 · 零售科技",
+                logo: "电商",
+                tags: ["用户画像", "推荐算法", "大数据分析"],
+                stats: [
+                    { value: "35%", label: "转化率提升" },
+                    { value: "2.1倍", label: "用户粘性提升" },
+                    { value: "1800万", label: "日处理数据量" }
+                ],
+                challenge: "这家领先的电商平台面临用户增长放缓、转化率停滞的问题，需要更精准的用户洞察和个性化推荐来提升用户体验和商业价值。",
+                solution: "我们开发了基于深度学习的用户行为分析系统和个性化推荐引擎，整合了用户浏览、购买、社交等多维度数据，构建了精准的用户画像体系。",
+                results: "平台用户转化率提升35%，客单价增长28%，用户复购率提升2.1倍，年度GMV增长达42%，获得了显著的业务增长。",
+                quote: "数据驱动的个性化推荐彻底改变了我们的用户体验，现在每个用户都能获得量身定制的购物旅程。",
+                author: "王总",
+                position: "产品副总裁"
+            },
+            clientD: {
+                name: "广州物流供应链",
+                industry: "物流运输 · 智慧供应链",
+                logo: "物流",
+                tags: ["路径优化", "物联网", "智能调度"],
+                stats: [
+                    { value: "58%", label: "配送效率提升" },
+                    { value: "32%", label: "成本降低" },
+                    { value: "24/7", label: "实时监控" }
+                ],
+                challenge: "这家全国性的物流企业面临着路线规划不科学、车辆空载率高、实时监控困难等问题，急需智能化升级来提升运营效率。",
+                solution: "我们实施了智能路径优化系统和物联网监控平台，通过AI算法实时计算最优配送路线，集成GPS、RFID等技术实现全程可视化监控。",
+                results: "车辆利用率提升45%，平均配送时间缩短58%，燃油成本降低32%，客户满意度从82%提升至96%，年运营成本减少2100万元。",
+                quote: "智慧物流系统让我们的运营效率达到了前所未有的高度，真正实现了降本增效。",
+                author: "陈总",
+                position: "运营总经理"
+            }
+        };
+
+        // 显示客户详情
+        function showClientDetail(clientId) {
+            const client = clientData[clientId];
+            if (!client) return;
+            
+            // 填充客户信息
+            document.getElementById('client-name').textContent = client.name;
+            document.getElementById('client-industry').textContent = client.industry;
+            document.getElementById('client-logo-large').innerHTML = client.logo;
+            
+            // 填充标签
+            const tagsContainer = document.getElementById('client-tags');
+            tagsContainer.innerHTML = '';
+            client.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'client-tag';
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+            
+            // 填充数据指标
+            const statsContainer = document.getElementById('client-stats');
+            statsContainer.innerHTML = '';
+            client.stats.forEach(stat => {
+                const statElement = document.createElement('div');
+                statElement.className = 'stat-item';
+                statElement.innerHTML = `
+                    <div class="stat-value">${stat.value}</div>
+                    <div class="stat-label">${stat.label}</div>
+                `;
+                statsContainer.appendChild(statElement);
+            });
+            
+            // 填充详细内容
+            document.getElementById('client-challenge').textContent = client.challenge;
+            document.getElementById('client-solution').textContent = client.solution;
+            document.getElementById('client-results').textContent = client.results;
+            
+            // 填充客户评价
+            // 填充客户评价
+            const quoteElement = document.querySelector('.client-quote');
+            quoteElement.querySelector('.quote-text').textContent = `"${client.quote}"`;
+            quoteElement.querySelector('#quote-author').textContent = client.author;
+            quoteElement.querySelector('#quote-position').textContent = client.position;
+            
+            // 显示弹窗
+            document.getElementById('clientDetailModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // 禁止背景滚动
+        }
+
+        // 关闭客户详情
+        function closeClientDetail() {
+            document.getElementById('clientDetailModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; // 恢复背景滚动
+        }
+
+        // 点击弹窗外部关闭
+        document.getElementById('clientDetailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeClientDetail();
+            }
+        });
+
+        // ESC键关闭
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeClientDetail();
+            }
+        });
+    </script>
+    <!-- 客户详情弹窗 -->
+<div id="clientDetailModal" class="client-detail-modal">
+    <div class="client-detail-content">
+        <button class="client-detail-close" onclick="closeClientDetail()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="client-detail-header">
+            <div class="client-logo-large" id="client-logo-large">
+                <!-- 动态填充 -->
+            </div>
+            <div class="client-info">
+                <h3 id="client-name">客户名称</h3>
+                <div class="client-industry" id="client-industry">行业领域</div>
+                <div class="client-tags" id="client-tags">
+                    <!-- 动态填充 -->
+                </div>
+            </div>
+        </div>
+        <div class="client-detail-body">
+            <div class="client-stats" id="client-stats">
+                <!-- 动态填充 -->
+            </div>
+            
+            <div class="client-challenge">
+                <h4><i class="fas fa-exclamation-circle"></i> 面临的挑战</h4>
+                <p id="client-challenge">挑战内容...</p>
+            </div>
+            
+            <div class="client-solution">
+                <h4><i极光 class="fas fa-lightbulb"></i> 我们的解决方案</h4>
+                <p id="client-solution">解决方案内容...</p>
+            </div>
+            
+            <div class="client-results">
+                <h4><i class="fas fa-chart-line"></i> 取得的成果</h4>
+                <p id="client-results">成果内容...</p>
+            </div>
+            
+            <div class="client-quote">
+                <p class="quote-text" id="quote-text">"客户评价内容..."</p>
+                <p class="quote-author">- <span id="quote-author">负责人姓名</span>, <span id="quote-position">职位</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
